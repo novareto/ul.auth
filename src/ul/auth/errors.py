@@ -2,7 +2,7 @@
 
 from . import require
 from cromlech.browser import exceptions
-from grokcore.components import name, context
+from grokcore.component import name, context
 from ul.browser.components import Page
 
 
