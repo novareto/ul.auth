@@ -6,6 +6,7 @@ from cromlech.dawnlight import DawnlightPublisher
 from cromlech.dawnlight import ViewLookup, view_locator, query_view
 from cromlech.security import Principal, Interaction, unauthenticated_principal
 from ul.browser.publication import Publication, base_model_lookup
+from cromlech.browser import getSession
 from zope.security.proxy import removeSecurityProxy
 
 
