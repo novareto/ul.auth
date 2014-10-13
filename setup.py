@@ -14,6 +14,20 @@ version = '1.0'
 long_description = read('README.txt') + '\n' + read('HISTORY.txt')
 
 install_requires = [
+    'barrel',
+    'cromlech.browser',
+    'cromlech.dawnlight',
+    'cromlech.security',
+    'cromlech.webob',
+    'dolmen.view',
+    'grokcore.component',
+    'grokcore.security',
+    'ul.browser',
+    'webob',
+    'zope.event',
+    'zope.interface',
+    'zope.location',
+    'zope.security',
     ]
 
 tests_require = [
