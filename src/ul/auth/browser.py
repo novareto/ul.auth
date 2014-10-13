@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from ul.browser.components import Form, Fields, action
+from ul.browser.components import Form
+from dolmen.forms.base import Fields, action
 from grokcore.component import name, context
 from . import require, UserLoggedInEvent, Principal
 
