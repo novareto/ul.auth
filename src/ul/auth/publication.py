@@ -5,7 +5,7 @@ from .utils import security_check as component_protector
 from cromlech.dawnlight import DawnlightPublisher
 from cromlech.dawnlight import ViewLookup, view_locator, query_view
 from cromlech.security import Principal, Interaction, unauthenticated_principal
-from ul.browser.publication.py import base_model_lookup
+from ul.browser.publication import Publication, base_model_lookup
 from zope.security.proxy import removeSecurityProxy
 
 
