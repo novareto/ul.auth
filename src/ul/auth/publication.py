@@ -25,6 +25,7 @@ class SecurePublication(Publication):
     def get_credentials(self, environ):
         session = getSession()
         user = environ.get('REMOTE_USER') or session.get('username')
+        return user
 
     def principal_factory(self, username):
         if username:

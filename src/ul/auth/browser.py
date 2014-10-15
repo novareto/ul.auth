@@ -41,7 +41,7 @@ class Login(Form):
 
     def make_principal(self, *args):
         return Principal(*args)
-    
+
     @action(u'Login')
     def log_me(self):
         data, errors = self.extractData()
@@ -69,7 +69,7 @@ class Login(Form):
                 session = getSession()
                 session['username'] = data['username']
                 self.flash(u"Login successful.")
-                principal = make_principal(data['username'])
+                principal = self.make_principal(data['username'])
                 self.request.principal = principal
                 notify(UserLoggedInEvent(principal))
                 return SuccessMarker(
