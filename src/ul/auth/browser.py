@@ -39,8 +39,8 @@ class Login(Form):
 
     fields = Fields(ILoginForm)
 
-    def make_principal(self, *args):
-        return Principal(*args)
+    def make_principal(self, **kwargs):
+        return Principal(**kwargs)
 
     @action(u'Login')
     def log_me(self):
