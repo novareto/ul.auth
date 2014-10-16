@@ -69,7 +69,7 @@ class Login(Form):
                 session = getSession()
                 session['username'] = data['username']
                 self.flash(u"Login successful.")
-                principal = self.make_principal(data['username'])
+                principal = self.make_principal(id=data['username'])
                 self.request.principal = principal
                 notify(UserLoggedInEvent(principal))
                 return SuccessMarker(

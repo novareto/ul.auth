@@ -13,8 +13,8 @@ unauthenticated_principal.permissions = set()
 
 class Principal(Principal):
 
-    def __init__(self, id, **attrs):
-        self.id = id
+    def __init__(self, **attrs):
+        self.id = attrs.get('id', u'')
         self.title = attrs.get('title', u'')
         self.description = attrs.get('description', u'')
         self.roles = attrs.get('roles', set())
