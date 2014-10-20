@@ -35,3 +35,4 @@ class UserLoggedInEvent(object):
 
 from .browser import ICredentials, ILoginForm, Login
 from .publication import SecurePublication, secured_view
+from .policy import GenericSecurityPolicy
