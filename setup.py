@@ -36,7 +36,7 @@ install_requires = [
 
 tests_require = [
     'BeautifulSoup',
-    'webtest',
+    'infrae.testbrowser',
     'pytest',
     'zope.configuration',
     'cromlech.wsgistate',
