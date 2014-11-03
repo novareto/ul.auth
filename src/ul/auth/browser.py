@@ -54,13 +54,13 @@ class Login(Form):
         if site is None:
             self.flash(u"You can't login here.")
             return SuccessMarker(
-                'Login failed', False, url=self.url(self.context), code=302)
+                'Login failed', False, url=self.request.url, code=302)
 
         credentials = getattr(site, 'credentials', None)
         if not credentials:
             self.flash(u"Missing credentials.")
             return SuccessMarker(
-                'Login failed', False, url=self.url(self.context), code=302)
+                'Login failed', False, url=self.request.url, code=302)
 
         for credential in credentials:
             credentials_manager = getUtility(ICredentials, name=credential)
@@ -73,7 +73,7 @@ class Login(Form):
                 self.request.principal = principal
                 notify(UserLoggedInEvent(principal))
                 return SuccessMarker(
-                    'Login successful', True, url=self.url(self.context),
+                    'Login successful', True, url=self.request.url,
                     code=302)
 
         self.flash(u'Login failed.')

@@ -14,24 +14,32 @@ version = '1.0'
 long_description = read('README.txt') + '\n' + read('HISTORY.txt')
 
 install_requires = [
-    'setuptools',
     'barrel',
     'cromlech.browser',
     'cromlech.dawnlight',
     'cromlech.security',
     'cromlech.webob',
+    'dolmen.forms.base',
     'dolmen.view',
     'grokcore.component',
     'grokcore.security',
+    'setuptools',
     'ul.browser',
     'webob',
+    'zope.component',
     'zope.event',
     'zope.interface',
     'zope.location',
+    'zope.schema',
     'zope.security',
     ]
 
 tests_require = [
+    'BeautifulSoup',
+    'webtest',
+    'pytest',
+    'zope.configuration',
+    'cromlech.wsgistate',
     ]
 
 setup(
