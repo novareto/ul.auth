@@ -1,0 +1,70 @@
+# -*- coding: utf-8 -*-
+
+import pytest
+from cromlech.browser import getSession, ILayout, IRequest
+from grokcore.component import testing
+from ul.auth.app import AuthMiddleware
+from webtest import TestApp
+from zope.configuration.config import ConfigurationMachine
+from cromlech.browser import ILayout
+from grokcore.component import adapter, implementer
+from zope.interface import Interface
+from zope.component import provideAdapter
+
+
+users = {
+    'admin': 'admin',
+    'user': 'test',
+    }
+
+
+def echo_layout(view, request):
+    def renderer(content, **layout_environ):
+        return content
+    return renderer
+    
+
+def setup_module(module):
+    config = ConfigurationMachine()
+    testing.grok('grokcore.component.meta')
+    testing.grok('dolmen.forms.base')
+    testing.grok('dolmen.forms.ztk')
+    testing.grok('dolmen.view.meta')
+    testing.grok('ul.browser')
+    testing.grok('ul.auth.browser')
+    config.execute_actions()
+    provideAdapter(echo_layout, (IRequest, Interface), ILayout, name='')
+
+
+def test_middleware():
+
+    def application(environ, start_response):
+        session = getSession()
+        counter = session.setdefault('counter', default=1)
+        body = str('Called %d times !' % counter)
+        headers = [('Content-Type', 'text/html; charset=utf8'),
+                    ('Content-Length', str(len(body)))]
+        start_response('200 OK', headers)
+        return [body]
+
+    app = TestApp(AuthMiddleware(users, 'test')(application))
+    resp = app.get('/')
+    assert 'form-field-username' in resp.body
+    assert 'form-field-password' in resp.body
+
+    form = resp.forms[0]
+    assert form.action == ''
+    form['form.field.username'] = 'wrong'
+    form['form.field.password'] = 'access'
+    result = form.submit('form.action.login')
+
+    assert 'form-field-username' in resp.body
+    assert 'form-field-password' in resp.body
+
+    form = resp.forms[0]
+    assert form.action == ''
+    form['form.field.username'] = 'user'
+    form['form.field.password'] = 'test'
+    result = form.submit('form.action.login')
+
+    assert result.body == ''
