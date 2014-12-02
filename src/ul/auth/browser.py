@@ -6,7 +6,7 @@ from grokcore.component import name, context
 from . import require, UserLoggedInEvent, Principal
 
 from cromlech.browser import exceptions, getSession
-from dolmen.forms.base import FAILURE, SuccessMarker
+from dolmen.forms.base import FAILURE, SuccessMarker, HIDDEN
 from zope.component import getUtility
 from zope.component.hooks import getSite
 from zope.event import notify
@@ -31,6 +31,10 @@ class ILoginForm(Interface):
         title=u"Password",
         required=True)
 
+    came_from = TextLine(
+        title=u" ",
+    )
+
 
 class Login(Form):
     name('login')
@@ -38,6 +42,7 @@ class Login(Form):
     require('zope.Public')
 
     fields = Fields(ILoginForm)
+    fields['came_from'].mode = HIDDEN
 
     def make_principal(self, **kwargs):
         return Principal(**kwargs)
@@ -72,8 +77,9 @@ class Login(Form):
                 principal = self.make_principal(id=data['username'])
                 self.request.principal = principal
                 notify(UserLoggedInEvent(principal))
+                camefrom = data.get('camefrom', self.url(self.context))
                 return SuccessMarker(
-                    'Login successful', True, url=self.request.url,
+                    'Login successful', True, url=camefrom,
                     code=302)
 
         self.flash(u'Login failed.')

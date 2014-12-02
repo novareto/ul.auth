@@ -16,7 +16,7 @@ class UnauthorizedPage(Page):
         self.flash(
             u"This page is protected and you're not allowed."
             u" Please login.")
-        self.redirect(self.url(obj) + '/login')
+        self.redirect(self.url(obj) + '/login?form.field.came_from=' + self.url(self.context.location))
 
 
 class ForbiddenPage(Page):
