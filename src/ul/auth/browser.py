@@ -32,8 +32,8 @@ class ILoginForm(Interface):
         required=True)
 
     came_from = TextLine(
-        title=u" ",
-    )
+        title=u"Initial destination",
+        required=False)
 
 
 class Login(Form):

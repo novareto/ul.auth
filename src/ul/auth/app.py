@@ -48,7 +48,7 @@ class AuthMiddleware(Location, form.FormAuth):
         return ses
 
     def save_session(self):
-        pass
+        pass 
 
     def not_authenticated(self, environ, start_response):
         """Respond to an unauthenticated request with a form.
