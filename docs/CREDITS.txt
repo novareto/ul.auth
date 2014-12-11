@@ -1,4 +1,7 @@
 CREDITS
 =======
 
-FIX ME
+Novareto GmbH
+-------------
+
+  - Christian Klinger (ck@novareto.de)

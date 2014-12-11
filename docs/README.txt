@@ -2,4 +2,4 @@
 ul.auth
 =======
 
-FIX ME
+Authentication and security components for UVC/Uvclight

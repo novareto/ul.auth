@@ -10,7 +10,7 @@ def read(*rnames):
             os.path.join(os.path.dirname(__file__), 'docs'),
             *rnames)).read()
 
-version = '1.0'
+version = '0.1'
 long_description = read('README.txt') + '\n' + read('HISTORY.txt')
 
 install_requires = [
@@ -36,10 +36,10 @@ install_requires = [
 
 tests_require = [
     'BeautifulSoup',
+    'cromlech.wsgistate',
     'infrae.testbrowser',
     'pytest',
     'zope.configuration',
-    'cromlech.wsgistate',
     ]
 
 setup(
