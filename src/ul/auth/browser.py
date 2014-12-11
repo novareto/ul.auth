@@ -43,10 +43,14 @@ class Login(Form):
 
     fields = Fields(ILoginForm)
     fields['came_from'].mode = HIDDEN
+    fields['came_from'].ignoreRequest = False
+    fields['username'].ignoreRequest = False
 
+    ignoreRequest = True
+    
     def make_principal(self, **kwargs):
         return Principal(**kwargs)
-
+    
     @action(u'Login')
     def log_me(self):
         data, errors = self.extractData()
@@ -58,14 +62,12 @@ class Login(Form):
         site = getSite()
         if site is None:
             self.flash(u"You can't login here.")
-            return SuccessMarker(
-                'Login failed', False, url=self.request.url, code=302)
+            return SuccessMarker('Login failed', False)
 
         credentials = getattr(site, 'credentials', None)
         if not credentials:
             self.flash(u"Missing credentials.")
-            return SuccessMarker(
-                'Login failed', False, url=self.request.url, code=302)
+            return SuccessMarker('Login failed', False)
 
         for credential in credentials:
             credentials_manager = getUtility(ICredentials, name=credential)
