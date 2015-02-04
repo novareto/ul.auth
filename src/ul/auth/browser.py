@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from ul.browser.components import Form
+from . import require, UserLoggedInEvent, Principal
+from cromlech.browser import exceptions, getSession
+from dolmen.forms.base import FAILURE, SuccessMarker, HIDDEN
 from dolmen.forms.base import Fields, action
 from grokcore.component import name, context
-from . import require, UserLoggedInEvent, Principal
-
-from cromlech.browser import exceptions, getSession
-from dolmen.forms.base import SUCCESS, FAILURE, SuccessMarker, HIDDEN
+from ul.browser.components import Form
 from zope.component import getUtility
 from zope.component.hooks import getSite
 from zope.event import notify
