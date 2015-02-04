@@ -6,7 +6,7 @@ from grokcore.component import name, context
 from . import require, UserLoggedInEvent, Principal
 
 from cromlech.browser import exceptions, getSession
-from dolmen.forms.base import FAILURE, SuccessMarker, HIDDEN
+from dolmen.forms.base import SUCCESS, FAILURE, SuccessMarker, HIDDEN
 from zope.component import getUtility
 from zope.component.hooks import getSite
 from zope.event import notify
@@ -50,7 +50,17 @@ class Login(Form):
     
     def make_principal(self, **kwargs):
         return Principal(**kwargs)
-    
+
+    def get_credentials_managers(self):
+        site = getSite()
+        credendials_managers = []
+        if site is not None:
+            for credential in getattr(site, 'credentials', []):
+                # we need to handle lookup errors here
+                utility = getUtility(ICredentials, name=credential)
+                credendials_managers.append(utility)
+        return credendials_managers
+
     @action(u'Login')
     def log_me(self):
         data, errors = self.extractData()
@@ -58,19 +68,12 @@ class Login(Form):
             self.submissionError = errors
             return FAILURE
 
-        # credentials here
-        site = getSite()
-        if site is None:
-            self.flash(u"You can't login here.")
-            return SuccessMarker('Login failed', False)
-
-        credentials = getattr(site, 'credentials', None)
-        if not credentials:
+        credendials_managers = self.get_credentials_managers()
+        if credentials_managers is None:
             self.flash(u"Missing credentials.")
             return SuccessMarker('Login failed', False)
 
-        for credential in credentials:
-            credentials_manager = getUtility(ICredentials, name=credential)
+        for credentials_manager in credentials_managers:
             account = credentials_manager.log_in(**data)
             if account:
                 session = getSession()
