@@ -68,11 +68,11 @@ class Login(Form):
             return FAILURE
 
         credendials_managers = self.get_credentials_managers()
-        if credentials_managers is None:
+        if credendials_managers is None:
             self.flash(u"Missing credentials.")
             return SuccessMarker('Login failed', False)
 
-        for credentials_manager in credentials_managers:
+        for credentials_manager in credendials_managers:
             account = credentials_manager.log_in(**data)
             if account:
                 session = getSession()
