@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from . import _
 from . import require, UserLoggedInEvent, Principal
 from cromlech.browser import exceptions, getSession
 from dolmen.forms.base import FAILURE, SuccessMarker, HIDDEN
@@ -23,15 +24,15 @@ class ICredentials(Interface):
 class ILoginForm(Interface):
 
     username = TextLine(
-        title=u'Username',
+        title=_(u'Username'),
         required=True)
 
     password = Password(
-        title=u"Password",
+        title=_(u"Password"),
         required=True)
 
     came_from = TextLine(
-        title=u"Initial destination",
+        title=_(u"Initial destination"),
         required=False)
 
 
@@ -69,7 +70,7 @@ class Login(Form):
 
         credendials_managers = self.get_credentials_managers()
         if credendials_managers is None:
-            self.flash(u"Missing credentials.")
+            self.flash(_(u"Missing credentials."))
             return SuccessMarker('Login failed', False)
 
         for credentials_manager in credendials_managers:
@@ -77,7 +78,7 @@ class Login(Form):
             if account:
                 session = getSession()
                 session['username'] = data['username']
-                self.flash(u"Login successful.")
+                self.flash(_(u"Login successful."))
                 principal = self.make_principal(id=data['username'])
                 self.request.principal = principal
                 notify(UserLoggedInEvent(principal))
@@ -86,5 +87,5 @@ class Login(Form):
                     'Login successful', True, url=camefrom,
                     code=302)
 
-        self.flash(u'Login failed.')
+        self.flash(_(u'Login failed.'))
         return FAILURE
