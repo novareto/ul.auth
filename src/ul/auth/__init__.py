@@ -8,7 +8,6 @@ from cromlech.security import Principal, unauthenticated_principal
 from grokcore.security import require
 
 # Convenient import
-require
 
 unauthenticated_principal.roles = set()
 unauthenticated_principal.permissions = set()

@@ -47,7 +47,7 @@ class Login(Form):
     fields['username'].ignoreRequest = False
 
     ignoreRequest = True
-    
+
     def make_principal(self, **kwargs):
         return Principal(**kwargs)
 

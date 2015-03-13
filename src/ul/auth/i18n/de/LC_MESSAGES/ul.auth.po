@@ -15,3 +15,17 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: ul.auth\n"
 
+msgid "Username"
+msgstr "Benutzername"
+
+msgid "Password"
+msgstr "Passwort"
+
+msgid "Missing credentials."
+msgstr "Bitte Anmeldedaten eingeben."
+
+msgid "Login successful."
+msgstr "Anmeldung erfolgreich"
+
+msgid "Login failed."
+msgstr "Fehler im Anmeldeprozess"
