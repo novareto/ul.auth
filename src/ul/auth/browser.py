@@ -61,7 +61,7 @@ class Login(Form):
                 credendials_managers.append(utility)
         return credendials_managers
 
-    @action(u'Login')
+    @action(_(u'Login'))
     def log_me(self):
         data, errors = self.extractData()
         if errors:

@@ -29,3 +29,13 @@ msgstr "Anmeldung erfolgreich"
 
 msgid "Login failed."
 msgstr "Fehler im Anmeldeprozess"
+
+msgid "Login"
+msgstr "Anmelden"
+
+msgid "This page is protected and you're not allowed. Please login."
+msgstr "Diese Seite ist geschützt und Sie sind nicht angemeldet. Bitte anmelden"
+
+msgid "This page is protected and you don't have the credentials."
+msgstr "Sie haben nicht ausreichende Berechtigungen um diese Seite zu sehen" 
+
