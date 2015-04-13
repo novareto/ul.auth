@@ -29,7 +29,7 @@ class SecurePublication(Publication):
 
     def principal_factory(self, username):
         if username:
-            return Principal(username)
+            return Principal(id=username)
         return unauthenticated_principal
 
     def publish_traverse(self, request, site):
