@@ -4,7 +4,7 @@ from zope.i18nmessageid import MessageFactory
 _ = MessageFactory('ul.auth')
 
 from zope.interface import Interface, implementer
-from cromlech.security import Principal, unauthenticated_principal
+from cromlech.security import Interaction, Principal, unauthenticated_principal
 from grokcore.security import require
 
 # Convenient import
