@@ -51,15 +51,11 @@ class Login(Form):
     def make_principal(self, **kwargs):
         return Principal(**kwargs)
 
-    def get_credentials_managers(self):
+    def credentials_managers(self):
         site = getSite()
-        credendials_managers = []
         if site is not None:
             for credential in getattr(site, 'credentials', []):
-                # we need to handle lookup errors here
-                utility = getUtility(ICredentials, name=credential)
-                credendials_managers.append(utility)
-        return credendials_managers
+                yield getUtility(ICredentials, name=credential)
 
     @action(_(u'Login'))
     def log_me(self):
@@ -68,14 +64,17 @@ class Login(Form):
             self.submissionError = errors
             return FAILURE
 
-        credendials_managers = self.get_credentials_managers()
+        credendials_managers = list(self.credentials_managers())
         if credendials_managers is None:
             self.flash(_(u"Missing credentials."))
             return SuccessMarker('Login failed', False)
 
         for credentials_manager in credendials_managers:
-            account = credentials_manager.log_in(**data)
-            if account:
+            result = credentials_manager.log_in(self.request, **data)
+            if isinstance(result, SuccessMarker):
+                self.flash(result.name)
+                return result
+            elif result:
                 session = getSession()
                 session['username'] = data['username']
                 self.flash(_(u"Login successful."))
