@@ -1,6 +1,14 @@
 Changes
 =======
 
+0.2 (2015-12-01)
+----------------
+
+  - Credential managers can now return a success marker
+  - Overhaul of the Principal object 
+  - Add german translation
+
+
 0.1 (2014-12-11)
 ----------------
 
