@@ -1,10 +1,16 @@
 Changes
 =======
 
-0.2.1 (2016-01-09)
+0.2.2 (2016-01-07)
 ------------------
 
-  - Added missing zcml top the release
+  - Added missing po to the release
+
+
+0.2.1 (2016-01-07)
+------------------
+
+  - Added missing zcml to the release
 
 
 0.2 (2015-12-01)
