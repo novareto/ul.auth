@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from . import UserLoggedInEvent
-from barrel import form
+from ul.auth.basic import form
 from cromlech.browser import IPublicationRoot
 from cromlech.browser import getSession, IResponseFactory
 from cromlech.security import Interaction
@@ -48,7 +48,7 @@ class AuthMiddleware(Location, form.FormAuth):
         return ses
 
     def save_session(self):
-        pass 
+        pass
 
     def not_authenticated(self, environ, start_response):
         """Respond to an unauthenticated request with a form.

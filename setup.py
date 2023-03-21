@@ -14,7 +14,6 @@ version = '0.4.dev0'
 long_description = read('README.txt') + '\n' + read('HISTORY.txt')
 
 install_requires = [
-    'barrel',
     'cromlech.browser',
     'cromlech.dawnlight',
     'cromlech.security',
