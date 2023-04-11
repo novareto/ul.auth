@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from . import UserLoggedInEvent
-from ul.auth.basic import form
+from ul.auth.basic import FormAuth
 from cromlech.browser import IPublicationRoot
 from cromlech.browser import getSession, IResponseFactory
 from cromlech.security import Interaction
@@ -26,7 +26,7 @@ def do_logout(global_conf, session_key):
 
 
 @implementer(IPublicationRoot, IResponseFactory)
-class AuthMiddleware(Location, form.FormAuth):
+class AuthMiddleware(Location, FormAuth):
     """
     """
     session_user_key = "user"
